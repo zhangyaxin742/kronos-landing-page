@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "KRONOS Pricing",
     description: "Choose the perfect plan for your productivity needs.",
-    url: "https://kronos.app/pricing",
+    url: "https://heykronos.com/pricing",
   },
 };
 

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Join KRONOS Waitlist",
     description: "Be first to experience the future of productivity.",
-    url: "https://kronos.app/signup",
+    url: "https://heykronos.com/signup",
   },
   robots: { index: false, follow: true },
 };

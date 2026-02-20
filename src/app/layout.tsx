@@ -73,7 +73,7 @@ const jsonLd = {
     "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
   applicationCategory: "ProductivityApplication",
   operatingSystem: "Web",
-  url: "https://kronos.app",
+  url: "https://heykronos.com",
 };
 
 export default function RootLayout({

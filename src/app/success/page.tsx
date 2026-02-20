@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "You're on the list - KRONOS",
     description: "We'll notify you the moment we launch.",
-    url: "https://kronos.app/success",
+    url: "https://heykronos.com/success",
   },
   robots: { index: false, follow: true },
 };

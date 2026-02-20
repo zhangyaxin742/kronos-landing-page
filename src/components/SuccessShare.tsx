@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-const SHARE_URL = "https://kronos.app";
+const SHARE_URL = "https://heykronos.com";
 const SHARE_TEXT = "I just joined the KRONOS waitlist.";
 
 export default function SuccessShare() {
