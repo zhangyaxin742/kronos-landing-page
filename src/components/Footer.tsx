@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
           <TrackedButton
             href={CTA_LINK}
-            variant="inverse"
+            variant="primary"
             size="lg"
             eventName="cta_click"
             eventData={{ location: "footer" }}

@@ -15,8 +15,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  themeColor: "#ffffff",
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://heykronos.com"),
+  metadataBase: new URL("https://kronos.app"),
   title: {
     default: "KRONOS - Premium Timeblocking & Productivity",
     template: "%s | KRONOS",
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
   creator: "KRONOS",
   openGraph: {
     type: "website",
-    url: "https://heykronos.com",
+    url: "https://kronos.app",
     title: "KRONOS - Premium Timeblocking & Productivity",
     description:
       "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
@@ -59,7 +63,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
   icons: { icon: "/favicon.ico" },
-  themeColor: "#ffffff",
 };
 
 const jsonLd = {

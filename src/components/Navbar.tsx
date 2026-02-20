@@ -37,6 +37,8 @@ export default function Navbar() {
         <div className="hidden md:block">
           <TrackedButton
             href={CTA_LINK}
+            variant="inverse"
+            size="lg"
             eventName="cta_click"
             eventData={{ location: "navbar" }}
           >
@@ -66,6 +68,8 @@ export default function Navbar() {
             </div>
             <TrackedButton
               href={CTA_LINK}
+              variant="inverse"
+              size="lg"
               eventName="cta_click"
               eventData={{ location: "navbar_mobile" }}
               className="mt-4 w-full justify-center"

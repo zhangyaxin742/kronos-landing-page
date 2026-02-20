@@ -24,7 +24,7 @@ export default function CTASection() {
         <div className="flex flex-col gap-4 sm:flex-row">
           <TrackedButton
             href={CTA_LINK}
-            variant="inverse"
+            variant="primary"
             size="lg"
             eventName="cta_click"
             eventData={{ location: "cta_section" }}

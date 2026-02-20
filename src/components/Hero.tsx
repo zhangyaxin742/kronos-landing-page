@@ -25,6 +25,7 @@ export default function Hero() {
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <TrackedButton
             href={CTA_LINK}
+            variant="inverse"
             size="lg"
             eventName="cta_click"
             eventData={{ location: "hero" }}
