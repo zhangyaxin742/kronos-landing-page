@@ -40,7 +40,7 @@ src/
   lib/
     constants.ts
 public/
-  logo.svg
+  logo.png
   mockup-dashboard.svg
   mockup-showcase.svg
   og-image.svg

@@ -3,28 +3,45 @@ import Image from "next/image";
 import TrackedButton from "@/components/ui/TrackedButton";
 import { CTA_LINK } from "@/lib/constants";
 
-const navLinks = [
+type NavLink = {
+  label: string;
+  href: string;
+};
+
+const defaultNavLinks: NavLink[] = [
   { label: "Features", href: "#features" },
   { label: "Showcase", href: "#showcase" },
 ];
 
-export default function Navbar() {
+type NavbarProps = {
+  links?: NavLink[];
+  ctaHref?: string;
+  ctaLabel?: string;
+  homeHref?: string;
+};
+
+export default function Navbar({
+  links = defaultNavLinks,
+  ctaHref = CTA_LINK,
+  ctaLabel = "Get Started",
+  homeHref = "#hero",
+}: NavbarProps) {
   return (
     <header className="fixed top-0 z-50 w-full border-b border-[color:var(--color-black-5)] bg-[color:var(--color-white-80)] backdrop-blur-md">
       <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-6 md:h-16">
         <a
-          href="#hero"
+          href={homeHref}
           className="flex items-center gap-3 text-lg font-semibold tracking-tight"
           aria-label="Kronos home"
         >
-          <Image src="/logo.svg" alt="Kronos logo" width={32} height={32} />
+          <Image src="/logo.png" alt="Kronos logo" width={32} height={32} />
           <span className="leading-none">KRONOS</span>
         </a>
         <nav
           className="hidden items-center gap-8 text-sm font-medium text-[color:var(--color-gray-700)] md:flex"
           aria-label="Primary"
         >
-          {navLinks.map((link) => (
+          {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -36,13 +53,13 @@ export default function Navbar() {
         </nav>
         <div className="hidden md:block">
           <TrackedButton
-            href={CTA_LINK}
+            href={ctaHref}
             variant="inverse"
             size="lg"
             eventName="cta_click"
             eventData={{ location: "navbar" }}
           >
-            Get Started
+            {ctaLabel}
           </TrackedButton>
         </div>
         <details className="group relative md:hidden">
@@ -56,7 +73,7 @@ export default function Navbar() {
           </summary>
           <div className="absolute right-0 mt-3 w-56 rounded-[var(--radius-lg)] border border-[color:var(--color-gray-200)] bg-[color:var(--color-white-95)] p-4 shadow-lg backdrop-blur-md">
             <div className="flex flex-col gap-3 text-sm font-medium text-[color:var(--color-gray-700)]">
-              {navLinks.map((link) => (
+              {links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -67,14 +84,14 @@ export default function Navbar() {
               ))}
             </div>
             <TrackedButton
-              href={CTA_LINK}
+              href={ctaHref}
               variant="inverse"
               size="lg"
               eventName="cta_click"
               eventData={{ location: "navbar_mobile" }}
               className="mt-4 w-full justify-center"
             >
-              Get Started
+              {ctaLabel}
             </TrackedButton>
           </div>
         </details>

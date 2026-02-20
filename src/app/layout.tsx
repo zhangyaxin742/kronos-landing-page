@@ -20,7 +20,7 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kronos.app"),
+  metadataBase: new URL("https://heykronos.com"),
   title: {
     default: "KRONOS - Premium Timeblocking & Productivity",
     template: "%s | KRONOS",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   creator: "KRONOS",
   openGraph: {
     type: "website",
-    url: "https://kronos.app",
+    url: "https://heykronos.com",
     title: "KRONOS - Premium Timeblocking & Productivity",
     description:
       "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
@@ -73,7 +73,7 @@ const jsonLd = {
     "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
   applicationCategory: "ProductivityApplication",
   operatingSystem: "Web",
-  url: "https://heykronos.com",
+  url: "https://kronos.app",
 };
 
 export default function RootLayout({

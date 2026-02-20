@@ -1,1 +1,1 @@
-export const CTA_LINK = "https://heykronos.com/signup";
+export const CTA_LINK = "/signup";

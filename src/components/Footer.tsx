@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <div className="flex items-center gap-3 text-lg font-semibold">
-              <Image src="/logo.svg" alt="Kronos logo" width={32} height={32} />
+              <Image src="/logo.png" alt="Kronos logo" width={32} height={32} />
               <span>KRONOS</span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-[color:var(--color-white-70)]">
