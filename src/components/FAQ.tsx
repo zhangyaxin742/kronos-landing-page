@@ -11,18 +11,36 @@ type FAQItem = {
 type FAQProps = {
   items: FAQItem[];
   className?: string;
+  title?: string;
+  description?: string;
+  hideHeader?: boolean;
 };
 
-export default function FAQ({ items, className = "" }: FAQProps) {
+export default function FAQ({
+  items,
+  className = "",
+  title = "Frequently asked questions",
+  description,
+  hideHeader = false,
+}: FAQProps) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
     <div
       className={`rounded-[var(--radius-lg)] border border-[color:var(--color-gray-200)] bg-[color:var(--color-white-90)] p-8 shadow-sm backdrop-blur ${className}`.trim()}
     >
-      <h2 className="text-2xl font-semibold text-[color:var(--color-black)]">
-        Frequently asked questions
-      </h2>
+      {!hideHeader ? (
+        <>
+          <h2 className="text-2xl font-semibold text-[color:var(--color-black)]">
+            {title}
+          </h2>
+          {description ? (
+            <p className="mt-2 text-sm text-[color:var(--color-gray-700)]">
+              {description}
+            </p>
+          ) : null}
+        </>
+      ) : null}
       <div className="mt-6 divide-y divide-[color:var(--color-gray-200)]">
         {items.map((item, index) => {
           const isOpen = openIndex === index;

@@ -22,42 +22,43 @@ export const viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://heykronos.com"),
   title: {
-    default: "KRONOS - Premium Timeblocking & Productivity",
+    default: "KRONOS - AI Life Coach for the Unreasonably Ambitious",
     template: "%s | KRONOS",
   },
   description:
-    "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
+    "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
   applicationName: "KRONOS",
   keywords: [
+    "AI life coach",
+    "moonshot goals",
+    "accountability",
     "timeblocking",
     "productivity",
-    "calendar",
-    "focus",
-    "schedule",
+    "goal tracking",
   ],
   authors: [{ name: "KRONOS" }],
   creator: "KRONOS",
   openGraph: {
     type: "website",
     url: "https://heykronos.com",
-    title: "KRONOS - Premium Timeblocking & Productivity",
+    title: "KRONOS - AI Life Coach for the Unreasonably Ambitious",
     description:
-      "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
+      "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
     siteName: "KRONOS",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "KRONOS - Time, Mastered",
+        alt: "KRONOS - Always seek the asymmetric outcome",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KRONOS - Premium Timeblocking & Productivity",
+    title: "KRONOS - AI Life Coach for the Unreasonably Ambitious",
     description:
-      "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
+      "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
     images: ["/og-image.svg"],
   },
   robots: { index: true, follow: true },
@@ -70,7 +71,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "KRONOS",
   description:
-    "Premium timeblocking and productivity tooling for teams and individuals who demand precision.",
+    "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
   applicationCategory: "ProductivityApplication",
   operatingSystem: "Web",
   url: "https://heykronos.com",

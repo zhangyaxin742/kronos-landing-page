@@ -24,8 +24,8 @@ export default function Footer() {
               <span>KRONOS</span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-[color:var(--color-white-70)]">
-              Premium timeblocking for modern professionals. Build rituals,
-              protect focus, and own your schedule.
+              AI life coach for the unreasonably ambitious. Moonshot goals,
+              confrontational accountability, and execution you can measure.
             </p>
           </div>
           <TrackedButton

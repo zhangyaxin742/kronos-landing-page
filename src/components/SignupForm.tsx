@@ -105,10 +105,10 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
       className="mx-auto w-full max-w-[480px] rounded-[var(--radius-lg)] border border-[color:var(--color-black-8)] bg-[color:var(--color-white-90)] p-10 shadow-[var(--shadow-soft)] backdrop-blur"
     >
       <h1 className="text-center text-3xl font-bold text-[color:var(--color-black)]">
-        Get Early Access
+        Ready to unf*ck your life?
       </h1>
       <p className="mt-2 text-center text-sm text-[color:var(--color-gray-500)]">
-        Join the KRONOS waitlist
+        AI coach for the unreasonably ambitious.
       </p>
 
       {plan.value !== "free" ? (

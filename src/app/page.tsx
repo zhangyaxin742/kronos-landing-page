@@ -3,6 +3,7 @@ import CTASection from "@/components/CTASection";
 import Features from "@/components/Features";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import LandingFAQ from "@/components/LandingFAQ";
 import Navbar from "@/components/Navbar";
 import ProductShowcase from "@/components/ProductShowcase";
 
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <Features />
         <ProductShowcase />
+        <LandingFAQ />
         <CTASection />
       </main>
       <AnalyticsTracker />

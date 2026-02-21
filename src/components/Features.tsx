@@ -3,26 +3,9 @@ import GlassCard from "@/components/ui/GlassCard";
 
 const features = [
   {
-    title: "Drag & Drop Flow",
+    title: "Brutal Honesty",
     description:
-      "Place timeblocks anywhere. Adjust duration instantly. Your schedule, your rules.",
-    icon: (
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-6 w-6"
-        fill="none"
-      >
-        <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M8 12h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M12 8v8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Focus Streaks",
-    description:
-      "Track deep work blocks and maintain momentum with adaptive focus cues.",
+      "AI coach that confronts you when you're off track. No sugarcoating, just clarity.",
     icon: (
       <svg
         aria-hidden="true"
@@ -31,37 +14,49 @@ const features = [
         fill="none"
       >
         <path
-          d="M4 12c2.5-4 5.5-6 8-6s5.5 2 8 6c-2.5 4-5.5 6-8 6s-5.5-2-8-6z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-        />
-        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" />
-      </svg>
-    ),
-  },
-  {
-    title: "Smart Insights",
-    description:
-      "See where your time goes and refine your weekly cadence with clarity.",
-    icon: (
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        className="h-6 w-6"
-        fill="none"
-      >
-        <path
-          d="M6 18V9m6 9V6m6 12v-5"
+          d="M12 5v3m0 8v3m7-7h-3M8 12H5m11.5-4.5l-2.1 2.1m-6.8 6.8-2.1 2.1m0-11 2.1 2.1m6.8 6.8 2.1 2.1"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
+        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
+  },
+  {
+    title: "Moonshot Goals",
+    description:
+      "Set 10 unreasonable goals for the next 12 months. KRONOS keeps you on pace.",
+    icon: (
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-6 w-6"
+        fill="none"
+      >
         <path
-          d="M4 20h16"
+          d="M12 3l2.2 4.5L19 8l-3.5 3.4.8 4.8L12 14.5 7.7 16.2l.8-4.8L5 8l4.8-.5L12 3z"
           stroke="currentColor"
           strokeWidth="1.5"
-          strokeLinecap="round"
+          strokeLinejoin="round"
         />
+      </svg>
+    ),
+  },
+  {
+    title: "Smart Execution",
+    description:
+      "AI-integrated timeblocking turns intent into daily action. Drag, drop, deliver.",
+    icon: (
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        className="h-6 w-6"
+        fill="none"
+      >
+        <rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M8 3v4M16 3v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M7 11h4M7 15h7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -79,11 +74,11 @@ export default function Features() {
             Features
           </p>
           <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-            Every minute, intentional.
+            Accountability at full volume.
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-white-70)] sm:text-lg">
-            KRONOS combines premium design with powerful timeblocking so your
-            calendar works as elegantly as you do.
+            KRONOS blends confrontational coaching with moonshot planning and
+            timeblocking that keeps you honest.
           </p>
         </FadeIn>
         <Stagger className="mt-12 grid gap-6 md:grid-cols-3">

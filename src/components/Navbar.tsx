@@ -11,6 +11,7 @@ type NavLink = {
 const defaultNavLinks: NavLink[] = [
   { label: "Features", href: "#features" },
   { label: "Showcase", href: "#showcase" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 type NavbarProps = {

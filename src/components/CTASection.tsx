@@ -14,11 +14,11 @@ export default function CTASection() {
             Get started
           </p>
           <h2 className="mt-4 text-3xl font-bold sm:text-5xl">
-            Ready to master your time?
+            Ready to unf*ck your life?
           </h2>
           <p className="mt-4 text-base text-[color:var(--color-white-70)] sm:text-lg">
-            Join the next wave of high-performance planners. Designed for
-            precision, built for momentum.
+            Meet the AI coach that calls you out, tracks your moonshots, and
+            forces the execution layer to match your ambition.
           </p>
         </div>
         <div className="flex flex-col gap-4 sm:flex-row">
