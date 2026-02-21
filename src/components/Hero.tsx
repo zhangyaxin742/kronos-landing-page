@@ -14,17 +14,16 @@ export default function Hero() {
       <div className="absolute -right-40 top-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,_var(--color-black-8),_transparent_70%)] blur-3xl" />
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[color:var(--color-gray-500)]">
-          AI life coach
+          YOU, BUT BETTER.
         </p>
         <h1 className="mt-6 text-balance text-4xl font-extrabold tracking-tight text-[color:var(--color-black)] sm:text-5xl lg:text-7xl">
-          Always seek the asymmetric outcome.
+          Unf*ck your life.
           <span className="mt-3 block text-2xl font-semibold text-[color:var(--color-gray-700)] sm:text-3xl">
             For the unreasonably ambitious.
           </span>
         </h1>
         <p className="mt-6 max-w-2xl text-pretty text-lg text-[color:var(--color-gray-700)] sm:text-xl">
-          AI life coach that won't let you settle. Set moonshot goals. Get
-          confronted when you fall short. Unf*ck your life.
+          Set moonshot goals. Keep yourself accountable. Chase the asymmetric outcome.
         </p>
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <TrackedButton
