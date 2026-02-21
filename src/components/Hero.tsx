@@ -18,12 +18,9 @@ export default function Hero() {
         </p>
         <h1 className="mt-6 text-balance text-4xl font-extrabold tracking-tight text-[color:var(--color-black)] sm:text-5xl lg:text-7xl">
           Unf*ck your life.
-          <span className="mt-3 block text-2xl font-semibold text-[color:var(--color-gray-700)] sm:text-3xl">
-            For the desperately ambitious.
-          </span>
         </h1>
         <p className="mt-6 max-w-2xl text-pretty text-lg text-[color:var(--color-gray-700)] sm:text-xl">
-          Set moonshot goals. We'll keep you accountable. Win the asymmetric outcome.
+          Win the asymmetric outcome.
         </p>
         <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <TrackedButton
