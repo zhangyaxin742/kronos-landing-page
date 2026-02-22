@@ -3,9 +3,14 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { track } from "@vercel/analytics";
+import { z } from "zod";
+import {
+  type FieldErrors,
+  type Resolver,
+  useForm,
+} from "react-hook-form";
 
 import Button from "@/components/ui/Button";
-import { validateEmail, validateName, validatePassword } from "@/lib/validation";
 
 type PlanOption = {
   value: "free" | "pro" | "elite";
@@ -19,6 +24,51 @@ const PLAN_OPTIONS: PlanOption[] = [
   { value: "pro", label: "KRONOS Pro", price: "$12/month", trialNote: "14-day trial" },
   { value: "elite", label: "KRONOS Elite", price: "$23/month" },
 ];
+
+const signupSchema = z.object({
+  email: z.string().email("Please enter a valid email."),
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters.")
+    .refine((value) => !/\d/.test(value), {
+      message: "Name must be at least 2 characters.",
+    }),
+  password: z
+    .string()
+    .min(8, "Password must meet the requirements.")
+    .regex(/[A-Z]/, "Password must meet the requirements.")
+    .regex(/\d/, "Password must meet the requirements."),
+});
+
+type SignupFormValues = z.infer<typeof signupSchema>;
+
+const formResolver: Resolver<SignupFormValues> = async (values) => {
+  const result = signupSchema.safeParse(values);
+
+  if (result.success) {
+    return { values: result.data, errors: {} };
+  }
+
+  const fieldErrors = result.error.flatten().fieldErrors;
+  const errors: FieldErrors<SignupFormValues> = {};
+
+  if (fieldErrors.email?.[0]) {
+    errors.email = { type: "validation", message: fieldErrors.email[0] };
+  }
+
+  if (fieldErrors.name?.[0]) {
+    errors.name = { type: "validation", message: fieldErrors.name[0] };
+  }
+
+  if (fieldErrors.password?.[0]) {
+    errors.password = {
+      type: "validation",
+      message: fieldErrors.password[0],
+    };
+  }
+
+  return { values: {}, errors };
+};
 
 const normalizePlan = (plan?: string): PlanOption => {
   const matched = PLAN_OPTIONS.find((option) => option.value === plan);
@@ -35,19 +85,26 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
     () => normalizePlan(selectedPlan),
     [selectedPlan]
   );
-  const [email, setEmail] = React.useState("");
-  const [name, setName] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [touched, setTouched] = React.useState({
-    email: false,
-    name: false,
-    password: false,
-  });
-  const [submitAttempted, setSubmitAttempted] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [waitlistCount, setWaitlistCount] = React.useState<number | null>(null);
   const [formStarted, setFormStarted] = React.useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting, isValid, touchedFields },
+  } = useForm<SignupFormValues>({
+    mode: "onBlur",
+    resolver: formResolver,
+    defaultValues: {
+      email: "",
+      name: "",
+      password: "",
+    },
+  });
+
+  const values = watch();
 
   React.useEffect(() => {
     const loadCount = async () => {
@@ -64,14 +121,15 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
     loadCount();
   }, []);
 
-  const emailValid = validateEmail(email);
-  const nameValid = validateName(name);
-  const passwordValid = validatePassword(password);
-  const showEmailError = (touched.email || submitAttempted) && !emailValid;
-  const showNameError = (touched.name || submitAttempted) && !nameValid;
-  const showPasswordError =
-    (touched.password || submitAttempted) && !passwordValid;
-  const isFormValid = emailValid && nameValid && passwordValid;
+  const showEmailError = Boolean(errors.email);
+  const showNameError = Boolean(errors.name);
+  const showPasswordError = Boolean(errors.password);
+  const showEmailValid =
+    Boolean(values.email) && touchedFields.email && !errors.email;
+  const showNameValid = Boolean(values.name) && touchedFields.name && !errors.name;
+  const showPasswordValid =
+    Boolean(values.password) && touchedFields.password && !errors.password;
+  const isFormValid = isValid;
   const submitLabel = plan.value === "free" ? "Join Waitlist" : "Start Free Trial";
 
   const handleStart = () => {
@@ -80,28 +138,23 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
     track("signup_form_start");
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setSubmitAttempted(true);
+  const onSubmit = async (data: SignupFormValues) => {
     setSubmitError(null);
-
-    if (!isFormValid) return;
-
-    setLoading(true);
     track("signup_form_submit", { plan: plan.value });
 
     try {
-      window.localStorage.setItem("kronos_signup_email", email);
+      window.localStorage.setItem("kronos_signup_email", data.email);
     } catch {
       // Ignore storage errors
     }
+
     try {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email,
-          name,
+          email: data.email,
+          name: data.name,
           plan: plan.value,
         }),
       });
@@ -115,12 +168,15 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
     } catch (error) {
       track("signup_form_error", { reason: "submit_failed" });
       setSubmitError("Something went wrong. Please try again.");
-      setLoading(false);
     }
   };
 
+  const onInvalid = () => {
+    track("signup_form_error", { reason: "validation" });
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="signup-card">
+    <form onSubmit={handleSubmit(onSubmit, onInvalid)} className="signup-card">
       {selectedPlan ? (
         <div className="plan-badge">
           Signing up for: <strong>{plan.label}</strong> · {plan.price}
@@ -137,18 +193,14 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
             <input
               id="email"
               type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              onBlur={() => setTouched((prev) => ({ ...prev, email: true }))}
+              {...register("email")}
               onFocus={handleStart}
               placeholder="you@example.com"
               aria-invalid={showEmailError}
               required
-              className={`form-input mt-2 ${
-                showEmailError ? "error" : emailValid && email ? "valid" : ""
-              }`}
+              className={`form-input mt-2 ${showEmailError ? "error" : showEmailValid ? "valid" : ""}`}
             />
-            {emailValid && email ? (
+            {showEmailValid ? (
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-[#2D7A4F]">
                 ✓
               </span>
@@ -156,7 +208,7 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
           </div>
           {showEmailError ? (
             <p className="mt-2 text-[13px] text-[color:var(--color-alert)]">
-              Please enter a valid email.
+              {errors.email?.message}
             </p>
           ) : null}
         </div>
@@ -169,18 +221,14 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
             <input
               id="name"
               type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              onBlur={() => setTouched((prev) => ({ ...prev, name: true }))}
+              {...register("name")}
               onFocus={handleStart}
               placeholder="Your name"
               aria-invalid={showNameError}
               required
-              className={`form-input mt-2 ${
-                showNameError ? "error" : nameValid && name ? "valid" : ""
-              }`}
+              className={`form-input mt-2 ${showNameError ? "error" : showNameValid ? "valid" : ""}`}
             />
-            {nameValid && name ? (
+            {showNameValid ? (
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-[#2D7A4F]">
                 ✓
               </span>
@@ -188,7 +236,7 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
           </div>
           {showNameError ? (
             <p className="mt-2 text-[13px] text-[color:var(--color-alert)]">
-              Name must be at least 2 characters.
+              {errors.name?.message}
             </p>
           ) : null}
         </div>
@@ -201,22 +249,14 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
             <input
               id="password"
               type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              onBlur={() => setTouched((prev) => ({ ...prev, password: true }))}
+              {...register("password")}
               onFocus={handleStart}
               placeholder="Password"
               aria-invalid={showPasswordError}
               required
-              className={`form-input mt-2 ${
-                showPasswordError
-                  ? "error"
-                  : passwordValid && password
-                    ? "valid"
-                    : ""
-              }`}
+              className={`form-input mt-2 ${showPasswordError ? "error" : showPasswordValid ? "valid" : ""}`}
             />
-            {passwordValid && password ? (
+            {showPasswordValid ? (
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-[#2D7A4F]">
                 ✓
               </span>
@@ -227,7 +267,7 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
           </p>
           {showPasswordError ? (
             <p className="mt-2 text-[13px] text-[color:var(--color-alert)]">
-              Password must meet the requirements.
+              {errors.password?.message}
             </p>
           ) : null}
         </div>
@@ -243,10 +283,10 @@ export default function SignupForm({ selectedPlan }: SignupFormProps) {
         type="submit"
         variant="primary"
         size="lg"
-        disabled={!isFormValid || loading}
+        disabled={!isFormValid || isSubmitting}
         className="mt-6 w-full justify-center disabled:cursor-not-allowed disabled:opacity-70"
       >
-        {loading ? (
+        {isSubmitting ? (
           <span className="flex items-center gap-2">
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-[color:var(--color-white)] border-t-[color:var(--color-white)]" />
             Joining...

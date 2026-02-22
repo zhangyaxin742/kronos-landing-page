@@ -1,16 +1,19 @@
-import { validateEmail, validateName } from "@/lib/validation";
+import { z } from "zod";
+
 import { sendWaitlistEmails } from "@/lib/resend";
+import { checkRateLimit } from "@/lib/rateLimit";
 import { incrementWaitlistCount } from "@/lib/waitlistStore";
 
 export const dynamic = "force-dynamic";
 
+const waitlistSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2),
+  plan: z.enum(["free", "pro", "elite"]).default("free"),
+});
+
 export async function POST(request: Request) {
-  let payload: {
-    email?: string;
-    name?: string;
-    plan?: string;
-    company?: string;
-  } = {};
+  let payload: unknown = {};
 
   try {
     payload = await request.json();
@@ -21,14 +24,28 @@ export async function POST(request: Request) {
     );
   }
 
-  const { email, name, plan } = payload;
+  const parsed = waitlistSchema.safeParse(payload);
 
-  if (!email || !validateEmail(email)) {
-    return Response.json({ error: "Invalid email" }, { status: 400 });
+  if (!parsed.success) {
+    return Response.json({ error: "Invalid input" }, { status: 400 });
   }
 
-  if (!name || !validateName(name)) {
-    return Response.json({ error: "Invalid name" }, { status: 400 });
+  const { email, name, plan } = parsed.data;
+  const forwardedFor = request.headers.get("x-forwarded-for") ?? "";
+  const ip = forwardedFor.split(",")[0]?.trim() || "unknown";
+  const limit = checkRateLimit(`waitlist:${ip}`, 5, 60 * 60 * 1000);
+
+  if (!limit.allowed) {
+    const retryAfter = Math.max(1, Math.ceil((limit.reset - Date.now()) / 1000));
+    return Response.json(
+      { error: "Too many requests" },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": retryAfter.toString(),
+        },
+      }
+    );
   }
 
   try {
