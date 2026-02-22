@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import AnalyticsTracker from "@/components/AnalyticsTracker";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import PageAnalytics from "@/components/PageAnalytics";
@@ -181,6 +182,7 @@ export default function PricingPage() {
           </div>
         </section>
       </main>
+      <AnalyticsTracker />
       <PageAnalytics page="pricing" />
       <Footer />
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { track } from "@vercel/analytics";
 import { AnimatePresence, motion } from "framer-motion";
 
 type FAQItem = {
@@ -57,9 +58,13 @@ export default function FAQ({
                 className="flex w-full items-center justify-between gap-4 text-left text-[18px] font-semibold text-[color:var(--color-void)]"
                 aria-expanded={isOpen}
                 aria-controls={contentId}
-                onClick={() =>
-                  setOpenIndex(isOpen ? null : index)
-                }
+                onClick={() => {
+                  const nextIndex = isOpen ? null : index;
+                  if (!isOpen) {
+                    track("faq_open", { question: index });
+                  }
+                  setOpenIndex(nextIndex);
+                }}
               >
                 <span>{item.question}</span>
                 <span
