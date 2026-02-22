@@ -1,32 +1,36 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  weight: ["700", "800"],
+  variable: "--font-display",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+  display: "swap",
 });
 
 export const viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#F5F3F4",
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://heykronos.com"),
   title: {
-    default: "KRONOS - AI Life Coach for the Unreasonably Ambitious",
+    default: "KRONOS — AI Life Coach for the Unreasonably Ambitious",
     template: "%s | KRONOS",
   },
   description:
-    "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
+    "The AI coach that won't let you settle. Set moonshot goals. Get confronted when you fall short. No coddling.",
   applicationName: "KRONOS",
   keywords: [
     "AI life coach",
@@ -41,25 +45,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://heykronos.com",
-    title: "KRONOS - AI Life Coach for the Unreasonably Ambitious",
+    title: "KRONOS — Unf*ck your life.",
     description:
-      "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
+      "AI accountability for the unreasonably ambitious.",
     siteName: "KRONOS",
     images: [
       {
-        url: "/og-image.svg",
+        url: "/og/kronos-hero.png",
         width: 1200,
         height: 630,
-        alt: "KRONOS - Always seek the asymmetric outcome",
+        alt: "KRONOS — Unf*ck your life.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "KRONOS - AI Life Coach for the Unreasonably Ambitious",
+    title: "KRONOS — Unf*ck your life.",
     description:
-      "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
-    images: ["/og-image.svg"],
+      "AI accountability for the unreasonably ambitious.",
+    images: ["/og/kronos-hero.png"],
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
@@ -71,7 +75,7 @@ const jsonLd = {
   "@type": "WebApplication",
   name: "KRONOS",
   description:
-    "AI life coach that confronts you, tracks moonshot goals, and turns timeblocking into accountability.",
+    "AI accountability for the unreasonably ambitious.",
   applicationCategory: "ProductivityApplication",
   operatingSystem: "Web",
   url: "https://heykronos.com",
@@ -85,7 +89,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jakarta.variable} ${inter.variable} antialiased`}
       >
         <Script
           id="kronos-structured-data"

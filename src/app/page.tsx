@@ -3,19 +3,23 @@ import CTASection from "@/components/CTASection";
 import Features from "@/components/Features";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import LandingFAQ from "@/components/LandingFAQ";
 import Navbar from "@/components/Navbar";
+import PainSection from "@/components/PainSection";
 import ProductShowcase from "@/components/ProductShowcase";
+import SocialProofStrip from "@/components/SocialProofStrip";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[color:var(--color-white)] text-[color:var(--color-black)]">
+    <div className="min-h-screen bg-[color:var(--color-bone)] text-[color:var(--color-void)]">
       <Navbar />
       <main>
         <Hero />
+        <SocialProofStrip />
+        <PainSection />
         <Features />
         <ProductShowcase />
-        <LandingFAQ />
+        <TestimonialsSection />
         <CTASection />
       </main>
       <AnalyticsTracker />

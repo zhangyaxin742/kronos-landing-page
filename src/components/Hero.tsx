@@ -1,50 +1,92 @@
-import Image from "next/image";
+"use client";
 
+import * as React from "react";
+import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
+
+import { fadeUp, stagger } from "@/components/Motion";
 import Button from "@/components/ui/Button";
 import TrackedButton from "@/components/ui/TrackedButton";
 import { CTA_LINK } from "@/lib/constants";
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const [showIndicator, setShowIndicator] = React.useState(true);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setShowIndicator(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[color:var(--color-white)] pt-24"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[color:var(--color-bone)] pt-28"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--color-black-8),_transparent_60%)]" />
-      <div className="absolute -right-40 top-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,_var(--color-black-8),_transparent_70%)] blur-3xl" />
       <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-16 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[color:var(--color-gray-500)]">
-          YOU, BUT BETTER.
-        </p>
-        <h1 className="mt-6 text-balance text-4xl font-extrabold tracking-tight text-[color:var(--color-black)] sm:text-5xl lg:text-7xl">
-          Unf*ck your life.
-        </h1>
-        <p className="mt-6 max-w-2xl text-pretty text-lg text-[color:var(--color-gray-700)] sm:text-xl">
-          Win the asymmetric outcome.
-        </p>
-        <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <TrackedButton
-            href={CTA_LINK}
-            variant="inverse"
-            size="lg"
-            eventName="cta_click"
-            eventData={{ location: "hero" }}
+        <motion.div
+          className="flex w-full flex-col items-center"
+          variants={reduceMotion ? undefined : stagger}
+          initial={reduceMotion ? false : "initial"}
+          animate={reduceMotion ? undefined : "animate"}
+        >
+          <motion.p
+            variants={reduceMotion ? undefined : fadeUp}
+            className="text-[13px] font-semibold uppercase tracking-[0.15em] text-[color:var(--color-mid-gray)]"
+            style={{ fontFamily: "var(--font-body)" }}
           >
-            Get Started
-          </TrackedButton>
-          <Button href="#showcase" size="lg" variant="secondary">
-            View Demo
-          </Button>
-        </div>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-[color:var(--color-gray-700)]">
-          <span className="rounded-full bg-[color:var(--accent-blue)] px-3 py-1">Brutal Honesty</span>
-          <span className="rounded-full bg-[color:var(--accent-green)] px-3 py-1">Moonshot Goals</span>
-          <span className="rounded-full bg-[color:var(--accent-purple)] px-3 py-1">Daily Check-ins</span>
-          <span className="rounded-full bg-[color:var(--accent-yellow)] px-3 py-1">Smart Execution</span>
-          <span className="rounded-full bg-[color:var(--accent-orange)] px-3 py-1">AI Confrontation</span>
-          <span className="rounded-full bg-[color:var(--accent-red)] px-3 py-1">Timeblocking</span>
-        </div>
-        <div className="float-panel mt-12 w-full max-w-5xl rounded-[24px] border border-[color:var(--color-gray-200)] bg-[color:var(--color-white-90)] p-4 shadow-[var(--shadow-strong)] backdrop-blur">
+            YOU, BUT BETTER.
+          </motion.p>
+          <motion.h1
+            variants={reduceMotion ? undefined : fadeUp}
+            className="mt-6 text-balance text-[clamp(64px,8vw,96px)] font-extrabold leading-[1] tracking-[-0.03em] text-[color:var(--color-void)]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Unf*ck your life.
+          </motion.h1>
+          <motion.p
+            variants={reduceMotion ? undefined : fadeUp}
+            className="mt-6 max-w-2xl text-pretty text-[clamp(18px,2vw,22px)] text-[color:var(--color-mid-gray)]"
+          >
+            Win the asymmetric outcome.
+          </motion.p>
+          <motion.div
+            variants={reduceMotion ? undefined : fadeUp}
+            className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
+          >
+            <TrackedButton
+              href={CTA_LINK}
+              variant="primary"
+              size="lg"
+              eventName="cta_click"
+              eventData={{ location: "hero", plan: "none" }}
+            >
+              Get Started
+            </TrackedButton>
+            <Button href="#showcase" size="lg" variant="secondary">
+              View Demo
+            </Button>
+          </motion.div>
+          <motion.p
+            variants={reduceMotion ? undefined : fadeUp}
+            className="mt-6 text-[14px] text-[color:var(--color-muted)]"
+          >
+            Brutal Honesty · Moonshot Goals · Daily Check-ins · Smart Execution ·
+            AI Confrontation · Timeblocking
+          </motion.p>
+        </motion.div>
+        <motion.div
+          variants={reduceMotion ? undefined : fadeUp}
+          initial={reduceMotion ? undefined : "initial"}
+          animate={reduceMotion ? undefined : "animate"}
+          className="mt-12 w-full max-w-[1100px] rounded-[24px] border border-[color:var(--color-light)] bg-[color:var(--color-white)] p-4 shadow-[0_20px_60px_rgba(0,0,0,0.10)]"
+        >
           <Image
             src="/mockup-dashboard.svg"
             alt="KRONOS AI coach dashboard showing moonshot goals, a confrontation thread, and execution timeblocks."
@@ -53,11 +95,26 @@ export default function Hero() {
             className="h-auto w-full rounded-[18px]"
             priority
           />
+        </motion.div>
+      </div>
+      {showIndicator ? (
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="scroll-chevron h-6 w-6 text-[color:var(--color-light)]"
+            fill="none"
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
-      </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <div className="scroll-indicator" aria-hidden="true" />
-      </div>
+      ) : null}
     </section>
   );
 }

@@ -1,26 +1,22 @@
 "use client";
 
 import * as React from "react";
+import { track } from "@vercel/analytics";
 
 import PricingCard, { PricingTier } from "@/components/PricingCard";
 import PricingToggle from "@/components/PricingToggle";
-import FAQ, { FAQItem } from "@/components/FAQ";
 import { Stagger } from "@/components/Motion";
 
 type BillingPeriod = "monthly" | "annual";
 
 type PricingSectionProps = {
   tiers: PricingTier[];
-  faqs: FAQItem[];
-  faqId?: string;
 };
 
 const STORAGE_KEY = "kronos-billing-period";
 
 export default function PricingSection({
   tiers,
-  faqs,
-  faqId = "faq",
 }: PricingSectionProps) {
   const [billingPeriod, setBillingPeriod] =
     React.useState<BillingPeriod>("annual");
@@ -36,10 +32,17 @@ export default function PricingSection({
     window.localStorage.setItem(STORAGE_KEY, billingPeriod);
   }, [billingPeriod]);
 
+  const handleToggle = (value: BillingPeriod) => {
+    setBillingPeriod(value);
+    track("billing_toggle", { mode: value });
+  };
+
   return (
     <div className="mt-12">
-      <PricingToggle value={billingPeriod} onChange={setBillingPeriod} />
-      <Stagger className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="flex justify-center">
+        <PricingToggle value={billingPeriod} onChange={handleToggle} />
+      </div>
+      <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
         {tiers.map((tier) => (
           <PricingCard
             key={tier.id}
@@ -48,9 +51,6 @@ export default function PricingSection({
           />
         ))}
       </Stagger>
-      <div id={faqId}>
-        <FAQ items={faqs} className="mt-16" />
-      </div>
     </div>
   );
 }

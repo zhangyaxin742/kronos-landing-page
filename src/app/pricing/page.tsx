@@ -3,18 +3,20 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import PageAnalytics from "@/components/PageAnalytics";
+import FAQ from "@/components/FAQ";
 import PricingSection from "@/components/PricingSection";
 import { FadeIn } from "@/components/Motion";
 import type { PricingTier } from "@/components/PricingCard";
 import type { FAQItem } from "@/components/FAQ";
 
 export const metadata: Metadata = {
-  title: "Pricing - KRONOS | Premium Timeblocking",
+  title: "Pricing — KRONOS | Start Free, Upgrade When Ready",
   description:
-    "Simple, transparent pricing for KRONOS. Start free or go Pro for advanced features.",
+    "Simple, honest pricing for KRONOS. Free tier, Pro at $12/mo, Elite at $23/mo. 14-day free trial on Pro.",
   openGraph: {
-    title: "KRONOS Pricing",
-    description: "Choose the perfect plan for your productivity needs.",
+    title: "Pricing — KRONOS",
+    description:
+      "Simple, honest pricing for KRONOS. Free tier, Pro at $12/mo, Elite at $23/mo.",
     url: "https://heykronos.com/pricing",
   },
 };
@@ -22,77 +24,96 @@ export const metadata: Metadata = {
 const tiers: PricingTier[] = [
   {
     id: "free",
-    name: "Free",
-    description: "Essential timeblocking for focused individuals.",
+    name: "Starter",
+    description: "Start building proof. Keep it honest.",
     monthlyPrice: 0,
     annualPrice: 0,
     features: [
-      { label: "Core timeblocking", included: true },
-      { label: "Focus session presets", included: true },
-      { label: "Calendar sync", included: true },
-      { label: "Analytics dashboard", included: false },
-      { label: "Team rituals", included: false },
-      { label: "Priority support", included: false },
+      { label: "Up to 3 moonshot goals", included: true },
+      { label: "Daily check-ins", included: true },
+      { label: "Basic timeblocking (7 days)", included: true },
+      { label: "AI coaching (5 messages/day)", included: true },
+      { label: "Unlimited goals", included: false },
+      { label: "AI confrontation mode", included: false },
+      { label: "Advanced analytics", included: false },
     ],
     cta: "Get Started",
   },
   {
     id: "pro",
     name: "Pro",
-    description: "For high-performers who want every advantage.",
-    monthlyPrice: 12,
-    annualPrice: 115,
+    description: "The plan that calls you out and keeps you sharp.",
+    monthlyPrice: 15,
+    annualPrice: 12,
     features: [
-      { label: "Everything in Free", included: true },
-      { label: "Deep work analytics", included: true },
-      { label: "Custom rituals", included: true },
-      { label: "AI time optimization", included: true },
-      { label: "Priority support", included: true },
-      { label: "Team rituals", included: false },
+      { label: "Unlimited moonshot goals", included: true },
+      { label: "Daily check-ins", included: true },
+      { label: "Full timeblocking suite", included: true },
+      { label: "Unlimited AI coaching", included: true },
+      { label: "AI confrontation mode", included: true },
+      { label: "Screentime integration", included: true },
+      { label: "Weekly progress reports", included: true },
+      { label: "14-day free trial", included: true },
     ],
     cta: "Start Free Trial",
     recommended: true,
-    badge: "Most Popular",
+    badge: "Most Chosen",
+    trialNote: "14-day free trial",
   },
   {
-    id: "team",
-    name: "Team",
-    description: "Align teams with shared time intelligence.",
-    monthlyPrice: 8,
-    annualPrice: 77,
-    priceSuffix: "per user",
+    id: "elite",
+    name: "Elite",
+    description: "For the few who want no ceiling.",
+    monthlyPrice: 29,
+    annualPrice: 23,
     features: [
       { label: "Everything in Pro", included: true },
-      { label: "Team timeblocking", included: true },
-      { label: "Shared rituals & templates", included: true },
-      { label: "Workspace analytics", included: true },
-      { label: "Admin controls", included: true },
-      { label: "Dedicated success manager", included: true },
+      { label: "Priority AI response time", included: true },
+      { label: "Custom goal frameworks", included: true },
+      { label: "Monthly 1:1 AI deep review", included: true },
+      { label: "Early access to new features", included: true },
+      { label: "Export all data (CSV, PDF)", included: true },
+      { label: "Dedicated support", included: true },
     ],
-    cta: "Contact Sales",
+    cta: "Go Elite",
   },
 ];
 
 const faqs: FAQItem[] = [
   {
+    question: "How does the AI coach actually work?",
+    answer:
+      "You set moonshot goals. KRONOS tracks your execution — timeblocks completed, todos done, screentime. When there's a gap between what you said and what you did, it tells you. Directly.",
+  },
+  {
     question: "Is there a free trial?",
-    answer: "Yes. The Pro plan includes a 14-day trial with no credit card required.",
+    answer:
+      "14 days on Pro, no credit card required. If it doesn't change how you work in two weeks, cancel without a conversation.",
+  },
+  {
+    question: "Will the AI actually confront me?",
+    answer:
+      "Yes. That's the whole point. If your goal says \"ship the product\" but your calendar says \"2hrs of actual work this week,\" KRONOS will ask what happened.",
   },
   {
     question: "Can I change plans later?",
-    answer: "Upgrade or downgrade anytime. Changes apply immediately with prorated billing.",
+    answer:
+      "Yes. Upgrade or downgrade anytime. Changes take effect at next billing cycle. Downgrades don't lose your data.",
   },
   {
-    question: "What payment methods do you accept?",
-    answer: "All major credit cards via Stripe. Enterprise plans can pay by invoice.",
+    question: "What payment methods are accepted?",
+    answer:
+      "All major credit cards via Stripe. Annual plans can be invoiced upon request.",
   },
   {
-    question: "Do you offer refunds?",
-    answer: "Yes. We offer a 30-day money-back guarantee if you are not satisfied.",
+    question: "Is my data private?",
+    answer:
+      "Your goals, timeblocks, and AI conversations are yours. We do not sell data. We do not train on your personal content without consent.",
   },
   {
-    question: "What happens when my trial ends?",
-    answer: "We will remind you three days before. Stay on Free or upgrade to Pro.",
+    question: "What if I want to cancel?",
+    answer:
+      "Cancel anytime from your account settings. No email required, no retention flow, no dark patterns.",
   },
 ];
 
@@ -104,7 +125,7 @@ const navLinks = [
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen bg-[color:var(--color-white)] text-[color:var(--color-black)]">
+    <div className="min-h-screen bg-[color:var(--color-bone)] text-[color:var(--color-void)]">
       <Navbar
         links={navLinks}
         ctaHref="/signup?plan=pro"
@@ -112,85 +133,51 @@ export default function PricingPage() {
         homeHref="/"
       />
       <main className="pt-24">
-        <section
-          id="plans"
-          className="relative overflow-hidden border-b border-[color:var(--color-black-5)] py-20"
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--color-black-8),_transparent_65%)]" />
-          <div className="absolute -right-40 top-10 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,_var(--color-black-10),_transparent_70%)] blur-3xl" />
-          <div className="relative mx-auto w-full max-w-6xl px-6">
+        <section id="plans" className="py-24">
+          <div className="mx-auto w-full max-w-6xl px-6">
             <FadeIn>
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[color:var(--color-gray-500)]">
-                Pricing
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[color:var(--color-muted)]">
+                PRICING
               </p>
-              <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                Choose the plan that respects your time.
+              <h1
+                className="mt-5 text-balance text-[var(--text-h1)] font-extrabold tracking-[-0.02em] text-[color:var(--color-void)]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Simple. Honest. No gotchas.
               </h1>
-              <p className="mt-5 max-w-2xl text-base text-[color:var(--color-gray-700)] sm:text-lg">
-                Transparent pricing, premium craftsmanship, and a workflow that keeps
-                every hour intentional.
+              <p className="mt-5 max-w-2xl text-[var(--text-body-large)] text-[color:var(--color-mid-gray)]">
+                The AI doesn't cost more when it works harder. Pick a plan. Start
+                today.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3 text-xs font-medium text-[color:var(--color-gray-700)]">
-                {[
-                  "14-day Pro trial",
-                  "Cancel anytime",
-                  "30-day guarantee",
-                  "No setup fees",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-[color:var(--color-gray-100)] px-3 py-1"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
             </FadeIn>
-            <PricingSection tiers={tiers} faqs={faqs} faqId="faq" />
+            <PricingSection tiers={tiers} />
           </div>
         </section>
-        <section className="py-20">
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-xl">
-              <h2 className="text-3xl font-semibold sm:text-4xl">
-                Designed for clarity, built for momentum.
-              </h2>
-              <p className="mt-4 text-base text-[color:var(--color-gray-700)] sm:text-lg">
-                Every plan includes the core KRONOS experience: elegant timeblocking,
-                rich analytics, and the calm confidence of always knowing what matters
-                next.
-              </p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                {
-                  title: "Crystal-clear focus",
-                  detail: "Ritual templates that cut decision fatigue.",
-                },
-                {
-                  title: "Precision analytics",
-                  detail: "See exactly where your time is going.",
-                },
-                {
-                  title: "Team alignment",
-                  detail: "Shared timeblocks that respect deep work.",
-                },
-                {
-                  title: "Human support",
-                  detail: "Concierge onboarding for Pro and Team.",
-                },
-              ].map((value) => (
-                <div
-                  key={value.title}
-                  className="rounded-[var(--radius-lg)] border border-[color:var(--color-gray-200)] bg-[color:var(--color-white-90)] p-5 shadow-sm"
-                >
-                  <h3 className="text-base font-semibold">{value.title}</h3>
-                  <p className="mt-2 text-sm text-[color:var(--color-gray-700)]">
-                    {value.detail}
-                  </p>
-                </div>
-              ))}
-            </div>
+        <section id="faq" className="bg-[color:var(--color-white)] py-24">
+          <div className="mx-auto w-full max-w-[720px] px-6">
+            <FAQ items={faqs} />
+          </div>
+        </section>
+        <section className="bg-[color:var(--color-charcoal)] py-24 text-[color:var(--color-white)]">
+          <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 text-center">
+            <h2
+              className="text-[clamp(32px,4vw,40px)] font-bold tracking-[-0.02em]"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Still deciding?
+            </h2>
+            <p className="mt-4 text-[18px] text-[color:var(--color-mid-gray)]">
+              Start free. Upgrade when you're convinced.
+            </p>
+            <a
+              href="/signup?plan=free"
+              className="btn-primary mt-10 inline-flex min-h-[44px] items-center justify-center px-8 py-4 text-[16px] font-semibold"
+            >
+              Start Free — No Credit Card
+            </a>
+            <p className="mt-4 text-[13px] text-[color:var(--color-muted)]">
+              Or compare plans above.
+            </p>
           </div>
         </section>
       </main>

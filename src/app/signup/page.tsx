@@ -1,27 +1,15 @@
 import type { Metadata } from "next";
 
-import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import PageAnalytics from "@/components/PageAnalytics";
 import SignupPageContent from "@/components/SignupPageContent";
 import { FadeIn } from "@/components/Motion";
 
 export const metadata: Metadata = {
-  title: "Join the Waitlist - KRONOS",
-  description:
-    "Get early access to KRONOS. Join the waitlist and be first to experience premium timeblocking.",
-  openGraph: {
-    title: "Join KRONOS Waitlist",
-    description: "Be first to experience the future of productivity.",
-    url: "https://heykronos.com/signup",
-  },
+  title: "Join KRONOS — Stop Making Excuses",
+  description: "Join KRONOS and stop making excuses.",
   robots: { index: false, follow: true },
 };
-
-const navLinks = [
-  { label: "Pricing", href: "/pricing" },
-  { label: "FAQ", href: "/pricing#faq" },
-];
 
 type SignupPageProps = {
   searchParams?: Record<string, string | string[] | undefined>;
@@ -32,21 +20,32 @@ export default function SignupPage({ searchParams }: SignupPageProps) {
     typeof searchParams?.plan === "string" ? searchParams.plan : undefined;
 
   return (
-    <div className="min-h-screen bg-[color:var(--color-white)] text-[color:var(--color-black)]">
-      <Navbar links={navLinks} ctaHref="/pricing" ctaLabel="View Pricing" homeHref="/" />
-      <main className="pt-24">
-        <section className="relative overflow-hidden py-20">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--color-black-8),_transparent_65%)]" />
-          <div className="absolute -left-40 bottom-10 h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,_var(--color-black-10),_transparent_70%)] blur-3xl" />
-          <div className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6">
+    <div className="min-h-screen bg-[color:var(--color-bone)] text-[color:var(--color-void)]">
+      <Navbar links={[]} homeHref="/" showCta={false} showMenu={false} />
+      <main className="flex min-h-[calc(100vh-96px)] items-center justify-center pt-24 pb-16">
+        <section className="w-full px-6">
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
             <FadeIn className="w-full">
+              <div className="mb-12 text-center">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[color:var(--color-crimson)]">
+                  JOIN KRONOS
+                </p>
+                <h1
+                  className="mt-4 text-[40px] font-extrabold tracking-[-0.02em] text-[color:var(--color-void)]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Ready to stop making excuses?
+                </h1>
+                <p className="mt-4 text-[18px] text-[color:var(--color-mid-gray)]">
+                  The wait is over. Pick a plan. Start being accountable.
+                </p>
+              </div>
               <SignupPageContent selectedPlan={planParam} />
             </FadeIn>
           </div>
         </section>
       </main>
       <PageAnalytics page="signup" />
-      <Footer />
     </div>
   );
 }

@@ -17,10 +17,12 @@ export default function PricingToggle({
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex items-center gap-4 text-sm font-semibold text-[color:var(--color-gray-500)]">
+      <div className="flex items-center gap-4 text-sm font-semibold">
         <span
           className={`transition-colors ${
-            !isAnnual ? "text-[color:var(--color-black)]" : ""
+            !isAnnual
+              ? "text-[color:var(--color-void)]"
+              : "text-[color:var(--color-muted)]"
           }`}
         >
           Monthly
@@ -31,21 +33,25 @@ export default function PricingToggle({
           aria-checked={isAnnual}
           aria-label="Toggle billing period"
           onClick={() => onChange(isAnnual ? "monthly" : "annual")}
-          className="relative h-8 w-14 rounded-full border border-[color:var(--color-gray-200)] bg-[color:var(--color-white)] shadow-inner transition"
+          className={`relative h-8 w-16 rounded-full border border-[color:var(--color-light)] transition ${
+            isAnnual ? "bg-[color:var(--color-void)]" : "bg-[color:var(--color-white)]"
+          }`}
         >
           <span
-            className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-[color:var(--color-black)] transition-transform duration-300 ${
-              isAnnual ? "translate-x-6" : "translate-x-0"
+            className={`absolute top-1 left-1 h-6 w-6 rounded-full bg-[color:var(--color-white)] transition-transform duration-300 ${
+              isAnnual ? "translate-x-8" : "translate-x-0"
             }`}
           />
         </button>
         <span
           className={`flex items-center gap-2 transition-colors ${
-            isAnnual ? "text-[color:var(--color-black)]" : ""
+            isAnnual
+              ? "text-[color:var(--color-void)]"
+              : "text-[color:var(--color-muted)]"
           }`}
         >
           Annual
-          <span className="rounded-full bg-[color:var(--color-black)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-white)]">
+          <span className="rounded-full bg-[color:var(--color-crimson)] px-2 py-0.5 text-[12px] font-semibold text-[color:var(--color-white)]">
             Save 20%
           </span>
         </span>

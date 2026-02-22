@@ -1,4 +1,4 @@
-let waitlistCount = 1247;
+let waitlistCount = 2400;
 
 export const getWaitlistCount = () => waitlistCount;
 

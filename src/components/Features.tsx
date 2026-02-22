@@ -3,55 +3,62 @@ import GlassCard from "@/components/ui/GlassCard";
 
 const features = [
   {
-    title: "Brutal Honesty",
+    title: "AI Confrontation",
     description:
-      "AI coach that confronts you when you're off track. No sugarcoating, just clarity.",
+      "You said this was your #1 goal. Your timeblocks say otherwise. KRONOS won't let that slide.",
     icon: (
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
-        className="h-6 w-6"
+        className="h-8 w-8"
         fill="none"
       >
         <path
-          d="M12 5v3m0 8v3m7-7h-3M8 12H5m11.5-4.5l-2.1 2.1m-6.8 6.8-2.1 2.1m0-11 2.1 2.1m6.8 6.8 2.1 2.1"
+          d="M8 4h8a4 4 0 0 1 4 4v4a4 4 0 0 1-4 4h-3l-4 4v-4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9 10h6M9 13h4"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
-        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
       </svg>
     ),
   },
   {
     title: "Moonshot Goals",
     description:
-      "Set 10 unreasonable goals for the next 12 months. KRONOS keeps you on pace.",
+      "Set 10 unreasonable goals for 12 months. Get execution plans built to the week. No vague intentions — just milestones and deadlines.",
     icon: (
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
-        className="h-6 w-6"
+        className="h-8 w-8"
         fill="none"
       >
+        <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
         <path
-          d="M12 3l2.2 4.5L19 8l-3.5 3.4.8 4.8L12 14.5 7.7 16.2l.8-4.8L5 8l4.8-.5L12 3z"
+          d="M12 4v2M20 12h-2M12 20v-2M4 12h2"
           stroke="currentColor"
           strokeWidth="1.5"
-          strokeLinejoin="round"
+          strokeLinecap="round"
         />
       </svg>
     ),
   },
   {
-    title: "Smart Execution",
+    title: "Timeblock Engine",
     description:
-      "AI-integrated timeblocking turns intent into daily action. Drag, drop, deliver.",
+      "Drag. Drop. Track. Your calendar is your commitment. KRONOS knows when you're slipping before you do.",
     icon: (
       <svg
         aria-hidden="true"
         viewBox="0 0 24 24"
-        className="h-6 w-6"
+        className="h-8 w-8"
         fill="none"
       >
         <rect x="4" y="5" width="16" height="14" rx="3" stroke="currentColor" strokeWidth="1.5" />
@@ -66,31 +73,36 @@ export default function Features() {
   return (
     <section
       id="features"
-      className="bg-[color:var(--color-black)] py-24 text-[color:var(--color-white)] sm:py-32"
+      className="bg-[color:var(--color-charcoal)] py-24 text-[color:var(--color-white)] sm:py-32"
     >
       <div className="mx-auto w-full max-w-6xl px-6">
         <FadeIn className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-white-60)]">
-            Features
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--color-muted)]">
+            HOW IT WORKS
           </p>
-          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">
-            Accountability at full volume.
+          <h2
+            className="mt-4 text-[clamp(32px,4vw,40px)] font-bold tracking-[-0.02em]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Your sparring partner. Your execution engine.
           </h2>
-          <p className="mt-4 text-base text-[color:var(--color-white-70)] sm:text-lg">
-            KRONOS blends confrontational coaching with moonshot planning and
-            timeblocking that keeps you honest.
+          <p className="mt-4 text-base text-[color:var(--color-mid-gray)] sm:text-lg">
+            Set the goals. Get the confrontation. Ship the work.
           </p>
         </FadeIn>
         <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
           {features.map((feature) => (
             <StaggerItem key={feature.title}>
-              <GlassCard className="flex h-full flex-col gap-6 p-8 text-[color:var(--color-white)] transition duration-300 hover:bg-[color:var(--color-white-10)]">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--color-white-20)] bg-[color:var(--color-white-5)] text-[color:var(--color-white)]">
-                  {feature.icon}
-                </div>
+              <GlassCard className="flex h-full flex-col gap-6 p-12 text-[color:var(--color-white)]">
+                <div className="text-[color:var(--color-crimson)]">{feature.icon}</div>
                 <div>
-                  <h3 className="text-xl font-semibold">{feature.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-white-70)]">
+                  <h3
+                    className="text-[22px] font-semibold"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {feature.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-[color:var(--color-mid-gray)]">
                     {feature.description}
                   </p>
                 </div>

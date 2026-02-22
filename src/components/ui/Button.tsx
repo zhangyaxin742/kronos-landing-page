@@ -14,22 +14,18 @@ type ButtonProps = {
 );
 
 const baseClasses =
-  "inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-md)] font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-black)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-white)]";
+  "inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-md)] font-semibold transition-all duration-150";
 
 const sizeClasses: Record<ButtonSize, string> = {
-  md: "px-5 py-2.5 text-sm sm:text-base",
-  lg: "px-6 py-3 text-base sm:text-lg",
+  md: "px-5 py-3 text-[15px] sm:text-base",
+  lg: "px-7 py-3.5 text-base sm:text-[17px]",
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "bg-[color:var(--color-black)] text-[color:var(--color-white)] shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:bg-[color:var(--color-black-muted)]",
-  secondary:
-    "border border-[color:var(--color-black)] bg-transparent text-[color:var(--color-black)] hover:bg-[color:var(--color-gray-100)]",
-  inverse:
-    "bg-[color:var(--color-white)] text-[color:var(--color-black)] shadow-[var(--shadow-soft)] hover:-translate-y-0.5 hover:bg-[color:var(--color-gray-100)]",
-  outline:
-    "border border-[color:var(--color-white-40)] bg-transparent text-[color:var(--color-white)] hover:bg-[color:var(--color-white-10)] focus-visible:ring-[color:var(--color-white)] focus-visible:ring-offset-[color:var(--color-black)]",
+  primary: "btn-primary",
+  secondary: "btn-secondary",
+  inverse: "btn-secondary",
+  outline: "btn-ghost",
 };
 
 export default function Button({
